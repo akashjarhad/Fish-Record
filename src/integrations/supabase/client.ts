@@ -5,6 +5,14 @@ import type { Database } from './types';
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "https://zlghjezlgceaxgffyzma.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsZ2hqZXpsZ2NlYXhnZmZ5em1hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1MjQ4NzIsImV4cCI6MjA3MzEwMDg3Mn0.eEberf72umyvvRXXvIYm5o9iQussmdpZkP4po1Bq1sA";
 
+// Helper function to get redirect URL
+export const getRedirectURL = () => {
+  if (typeof window !== 'undefined') {
+    return window.location.origin;
+  }
+  return 'http://localhost:3000';
+};
+
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
@@ -13,5 +21,6 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     storage: localStorage,
     persistSession: true,
     autoRefreshToken: true,
+    detectSessionInUrl: true,
   }
 });
