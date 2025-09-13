@@ -3,7 +3,7 @@ services:
     name: fish-record
     env: node
     plan: free
-    buildCommand: npm cache clean --force && npm install --production=false && npm run build
+    buildCommand: npm run build
     startCommand: npm start
     healthCheckPath: /
     envVars:

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "npx vite",
-    "build": "npx vite build",
+    "prebuild": "npm install",
+    "build": "node build.js",
     "build:dev": "npx vite build --mode development",
     "lint": "npx eslint .",
     "preview": "npx vite preview",
