@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { spawn } from 'child_process';
+import express from 'express';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import process from 'process';
@@ -18,30 +18,35 @@ const distPath = join(__dirname, 'dist');
 console.log(`Starting Fish Record application on port ${port}`);
 console.log(`Serving files from: ${distPath}`);
 
-// Start the serve command
-const serveProcess = spawn('npx', ['serve', '-s', '-p', port.toString(), 'dist'], {
-  stdio: 'inherit',
-  shell: true
+// Create Express app
+const app = express();
+
+// Serve static files from dist directory
+app.use(express.static(distPath));
+
+// Handle SPA routing - send index.html for all non-static requests
+app.get('*', (req, res) => {
+  res.sendFile(join(distPath, 'index.html'));
 });
 
-// Handle process events
-serveProcess.on('error', (error) => {
-  console.error('Failed to start server:', error);
-  process.exit(1);
-});
-
-serveProcess.on('close', (code) => {
-  console.log(`Server process exited with code ${code}`);
-  process.exit(code);
+// Start the server
+const server = app.listen(port, '0.0.0.0', () => {
+  console.log(`✅ Fish Record app is running on http://0.0.0.0:${port}`);
 });
 
 // Handle graceful shutdown
 process.on('SIGINT', () => {
   console.log('\nGracefully shutting down...');
-  serveProcess.kill('SIGINT');
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
 });
 
 process.on('SIGTERM', () => {
   console.log('\nReceived SIGTERM, shutting down...');
-  serveProcess.kill('SIGTERM');
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
 });
