@@ -21,6 +21,16 @@ console.log(`Serving files from: ${distPath}`);
 // Create Express app
 const app = express();
 
+// Health check endpoint to prevent sleeping
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'OK',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    message: 'Fish Record server is running'
+  });
+});
+
 // Serve static files from dist directory
 app.use(express.static(distPath));
 

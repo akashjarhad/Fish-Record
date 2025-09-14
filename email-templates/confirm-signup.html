@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Fish Record - Confirm Your Account</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .header h1 {
+            color: white;
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            margin: 10px 0 0 0;
+            font-size: 16px;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .greeting {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #475569;
+            margin-bottom: 30px;
+        }
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .confirm-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+        .confirm-button:hover {
+            transform: translateY(-1px);
+        }
+        .info-box {
+            background-color: #f1f5f9;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .footer {
+            background-color: #f8fafc;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #64748b;
+        }
+        .footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .security-note {
+            background-color: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .security-note p {
+            margin: 0;
+            font-size: 14px;
+            color: #92400e;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+            .header, .content, .footer {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🐟</div>
+            <h1>Fish Record</h1>
+            <p>Fish Management System</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">Welcome to Fish Record!</div>
+            
+            <div class="message">
+                Thank you for signing up! We're excited to have you join our fish management platform. 
+                To complete your registration and secure your account, please confirm your email address by clicking the button below.
+            </div>
+
+            <div class="button-container">
+                <a href="{{ .ConfirmationURL }}" class="confirm-button">
+                    Confirm Your Email Address
+                </a>
+            </div>
+
+            <div class="info-box">
+                <strong>What's Next?</strong><br>
+                Once you confirm your email, you'll be able to:
+                <ul style="margin: 10px 0 0 0; padding-left: 20px;">
+                    <li>Manage farmer records and village data</li>
+                    <li>Track fish production and products</li>
+                    <li>Access comprehensive dashboard analytics</li>
+                    <li>Collaborate with your team members</li>
+                </ul>
+            </div>
+
+            <div class="security-note">
+                <p><strong>🔒 Security Note:</strong> This confirmation link will expire in 24 hours for your security. If you didn't create this account, you can safely ignore this email.</p>
+            </div>
+
+            <div class="message">
+                If the button above doesn't work, copy and paste this link into your browser:<br>
+                <code style="background: #f1f5f9; padding: 8px; border-radius: 4px; font-size: 12px; word-break: break-all;">{{ .ConfirmationURL }}</code>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                This email was sent to <strong>{{ .Email }}</strong><br>
+                If you have any questions, contact our support team at 
+                <a href="mailto:support@fishrecord.com">support@fishrecord.com</a>
+            </p>
+            <p style="margin-top: 15px; font-size: 12px; color: #94a3b8;">
+                © 2025 Fish Record. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
